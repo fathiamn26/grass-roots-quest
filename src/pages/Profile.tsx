@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import BottomNav from "@/components/BottomNav";
 
 const Profile = () => {
   const [selectedOutfit, setSelectedOutfit] = useState("casual");
@@ -36,8 +37,9 @@ const Profile = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full bg-background pb-20">
-      <div className="p-4 space-y-4">
+    <div className="max-w-screen-sm mx-auto">
+      <div className="min-h-screen w-full bg-background pb-20">
+        <div className="p-4 space-y-4">
         {/* Profile Header */}
         <Card className="p-6 text-center">
           <div className="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-7xl shadow-lg">
@@ -160,7 +162,9 @@ const Profile = () => {
             </div>
           </div>
         </Card>
+        </div>
       </div>
+      <BottomNav />
     </div>
   );
 };

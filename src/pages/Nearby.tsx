@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
+import BottomNav from "@/components/BottomNav";
 
 const Nearby = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -77,8 +78,9 @@ const Nearby = () => {
   );
 
   return (
-    <div className="min-h-screen w-full bg-background pb-20">
-      <div className="p-4 space-y-4">
+    <div className="max-w-screen-sm mx-auto">
+      <div className="min-h-screen w-full bg-background pb-20">
+        <div className="p-4 space-y-4">
         {/* Search Bar */}
         <div className="sticky top-0 bg-background pt-2 pb-2 z-10">
           <div className="relative">
@@ -217,7 +219,9 @@ const Nearby = () => {
             </p>
           </div>
         )}
+        </div>
       </div>
+      <BottomNav />
     </div>
   );
 };

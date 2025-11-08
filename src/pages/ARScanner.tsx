@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import BottomNav from "@/components/BottomNav";
+import arBenchView from "@/assets/ar-bench-view.jpg";
 
 const ARScanner = () => {
   const [isScanning, setIsScanning] = useState(false);
@@ -56,35 +58,43 @@ const ARScanner = () => {
   const currentExercise = scannedObject ? exercises[scannedObject as keyof typeof exercises] : null;
 
   return (
-    <div className="h-screen w-full bg-background flex flex-col">
+    <div className="max-w-screen-sm mx-auto">
+      <div className="h-screen w-full bg-background flex flex-col pb-16">
       {/* AR Camera View */}
       <div className="flex-1 relative bg-muted overflow-hidden">
+        {/* Background camera view */}
+        <img 
+          src={arBenchView} 
+          alt="AR camera view of park" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        
         {!scannedObject ? (
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center bg-background/20 backdrop-blur-sm">
             <div className="text-center space-y-4">
               <div className="relative">
-                <div className="w-48 h-48 border-4 border-dashed border-primary rounded-lg animate-pulse" />
-                <Target className="w-12 h-12 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                <div className="w-48 h-48 border-4 border-dashed border-primary rounded-lg animate-pulse bg-primary/5" />
+                <Target className="w-12 h-12 text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 drop-shadow-lg" />
               </div>
               {isScanning ? (
                 <div className="space-y-2">
-                  <p className="text-sm font-medium text-foreground">Scanning object...</p>
+                  <p className="text-sm font-medium text-foreground drop-shadow-md">Scanning object...</p>
                   <Progress value={60} className="w-48 mx-auto" />
                 </div>
               ) : (
-                <p className="text-sm text-muted-foreground">Point camera at park objects</p>
+                <p className="text-sm text-foreground drop-shadow-md font-medium">Point camera at park objects</p>
               )}
             </div>
           </div>
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center bg-background/20 backdrop-blur-sm">
             <div className="text-center space-y-4 p-6">
               <div className="relative">
-                <div className="w-48 h-48 border-4 border-primary rounded-lg bg-primary/10" />
+                <div className="w-48 h-48 border-4 border-primary rounded-lg bg-card/90 backdrop-blur-sm shadow-lg" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-6xl">🪑</span>
                 </div>
-                <Badge className="absolute -top-2 -right-2 bg-success text-white">
+                <Badge className="absolute -top-2 -right-2 bg-success text-white shadow-lg">
                   <Zap className="w-3 h-3 mr-1" />
                   Bench Detected!
                 </Badge>
@@ -153,6 +163,8 @@ const ARScanner = () => {
           </div>
         </div>
       )}
+      </div>
+      <BottomNav />
     </div>
   );
 };

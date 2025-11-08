@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MapPin, Cloud, Wind, Droplets, Activity } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import mapTerrain from "@/assets/map-terrain.jpg";
 
 const Map = () => {
   const [selectedLocation, setSelectedLocation] = useState<number | null>(null);
@@ -85,14 +86,15 @@ const Map = () => {
       </div>
 
       {/* Map Preview */}
-      <div className="flex-1 relative bg-muted">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center space-y-2">
-            <MapPin className="w-12 h-12 text-primary mx-auto" />
-            <p className="text-sm text-muted-foreground">Map with terrain contours</p>
-            <p className="text-xs text-muted-foreground">Your location: 51.505, -0.09</p>
-          </div>
-        </div>
+      <div className="flex-1 relative bg-muted overflow-hidden">
+        <img 
+          src={mapTerrain} 
+          alt="Terrain map with contour lines" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/30" />
 
         {/* Location Markers */}
         {nearbySpaces.map((space, idx) => (
