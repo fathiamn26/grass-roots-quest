@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Camera, Zap, Target, Trophy } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,7 @@ import BottomNav from "@/components/BottomNav";
 import arBenchView from "@/assets/ar-bench-view.jpg";
 
 const ARScanner = () => {
+  const navigate = useNavigate();
   const [isScanning, setIsScanning] = useState(false);
   const [scannedObject, setScannedObject] = useState<string | null>(null);
 
@@ -53,6 +55,12 @@ const ARScanner = () => {
       setScannedObject("bench");
       setIsScanning(false);
     }, 2000);
+  };
+
+  const handleStartWorkout = () => {
+    if (currentExercise) {
+      navigate("/workout", { state: currentExercise });
+    }
   };
 
   const currentExercise = scannedObject ? exercises[scannedObject as keyof typeof exercises] : null;
@@ -154,7 +162,7 @@ const ARScanner = () => {
           </div>
 
           <div className="flex gap-2">
-            <Button className="flex-1" onClick={() => setScannedObject(null)}>
+            <Button className="flex-1" onClick={handleStartWorkout}>
               Start Workout
             </Button>
             <Button variant="outline" onClick={() => setScannedObject(null)}>

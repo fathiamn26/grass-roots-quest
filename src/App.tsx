@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Nearby from "./pages/Nearby";
 import ARScanner from "./pages/ARScanner";
 import Profile from "./pages/Profile";
+import WorkoutSession from "./pages/WorkoutSession";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/nearby" element={<Nearby />} />
           <Route path="/ar" element={<ARScanner />} />
+          <Route path="/workout" element={<WorkoutSession />} />
           <Route path="/profile" element={<Profile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
