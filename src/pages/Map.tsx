@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapPin, Cloud, Wind, Droplets, Activity } from "lucide-react";
+import { MapPin, Cloud, Wind, Droplets, Activity, PersonStanding, Bike, Mountain, Footprints } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import mapTerrain from "@/assets/map-terrain.jpg";
@@ -15,6 +15,7 @@ const Map = () => {
       difficulty: "Easy",
       terrain: "Flat grass",
       activities: ["Running", "Yoga", "Walking"],
+      icon: PersonStanding,
       lat: 51.505,
       lng: -0.09,
     },
@@ -25,6 +26,7 @@ const Map = () => {
       difficulty: "Moderate",
       terrain: "Hilly trails",
       activities: ["Hiking", "Trail Running"],
+      icon: Mountain,
       lat: 51.508,
       lng: -0.085,
     },
@@ -35,6 +37,7 @@ const Map = () => {
       difficulty: "Easy",
       terrain: "Paved path",
       activities: ["Walking", "Jogging", "Cycling"],
+      icon: Bike,
       lat: 51.502,
       lng: -0.095,
     },
@@ -97,21 +100,24 @@ const Map = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/30" />
 
         {/* Location Markers */}
-        {nearbySpaces.map((space, idx) => (
-          <div
-            key={space.id}
-            className="absolute w-10 h-10 cursor-pointer transition-transform hover:scale-110"
-            style={{
-              left: `${30 + idx * 20}%`,
-              top: `${40 + idx * 10}%`,
-            }}
-            onClick={() => setSelectedLocation(space.id)}
-          >
-            <div className="w-full h-full bg-primary rounded-full flex items-center justify-center shadow-lg border-4 border-background">
-              <MapPin className="w-5 h-5 text-primary-foreground" />
+        {nearbySpaces.map((space, idx) => {
+          const IconComponent = space.icon;
+          return (
+            <div
+              key={space.id}
+              className="absolute w-10 h-10 cursor-pointer transition-transform hover:scale-110"
+              style={{
+                left: `${30 + idx * 20}%`,
+                top: `${40 + idx * 10}%`,
+              }}
+              onClick={() => setSelectedLocation(space.id)}
+            >
+              <div className="w-full h-full bg-primary rounded-full flex items-center justify-center shadow-lg border-4 border-background">
+                <IconComponent className="w-5 h-5 text-primary-foreground" />
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Bottom Sheet - Nearby Spaces */}
